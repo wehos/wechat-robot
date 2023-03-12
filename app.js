@@ -10,7 +10,10 @@ const { WechatyBuilder } = require("wechaty");
 const onScan = require("./listeners/on-scan.js");
 const onLogin = require("./listeners/on-login.js");
 const onMessage = require("./listeners/on-message.js");
+//const onMessage = await import("./listeners/on-message.mjs");
 const onFriendship = require("./listeners/on-friendship.js");
+
+//(async function test() {(await import('./test.mjs')).test();})()
 
 const bot = WechatyBuilder.build({
   name: "wechat-bot",

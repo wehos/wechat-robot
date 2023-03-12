@@ -10,15 +10,19 @@ const { FileBox } = require("file-box");
 const superagent = require("../superagent");
 const config = require("../config");
 const { colorRGBtoHex, colorHex } = require("../utils");
-//import { ChatGPTUnofficialProxyAPI } from 'chatgpt'
-//const ChatGPTUnofficialProxyAPI = import('chatgpt.chatGPTUnofficialProxyAPI');
-var parentMessageId = 'none'
-var default_prompt = ''
 
-async function chatgpt(text) {
-    return (await import('./helper.mjs')).example(text, parentMessageId);
-}
-
+const allKeywords = `回复序号或关键字获取对应服务
+1.技术交流群
+2.毒鸡汤
+3.神回复(略微开车)
+4.英语一句话
+转小写(例：转小写PEANUT)
+转大写(例：转大写peanut)
+转rgb(例：转rgb#cccccc)
+转16进制(例：转16进制rgb(255,255,255))
+天气 城市名(例：天气 西安)
+全国肺炎(实时肺炎数据)
+省份/自治区 肺炎(例：河南肺炎)`;
 /**
  * sleep
  * @param {*} ms
@@ -47,41 +51,45 @@ async function onMessage(msg, bot) {
  * 处理用户消息
  */
 async function onPeopleMessage(msg, bot) {
-  if (msg.age() > 120) {
-    console.log('Message discarded because its TOO OLD(than 2 min)')
-    return
-  }
   //获取发消息人
   const contact = msg.talker();
   //对config配置文件中 ignore的用户消息不必处理
   if (config.IGNORE.includes(contact.payload.name)) return;
   let content = msg.text().trim(); // 消息内容 使用trim()去除前后空格
-  if (contact.payload.name === 'Wehos'){
-    if (content === "clean")
-       parentMessageId = 'none';
-    else if (content.indexOf("prompt") === 0) {
-       const res = await chatgpt(content.replace("prompt", ""))
-       parentMessageId = res[1]
-       await msg.say(res[0])     
-    } else if (content.indexOf("chat酱") === 0) {
-       const res = await chatgpt(content)
-       parentMessageId = res[1]
-       await msg.say(res[0])
-    } else if (content.indexOf("set") === 0){
-       default_prompt = content.slice(3)
-    } else if (content === "reset" || content === "default"){
-       parentMessageId = 'none'
-       const res = await chatgpt(default_prompt)
-       parentMessageId = res[1]
-       await msg.say(res[0])
-    } else if (content === "display" || content === "print") {
-       await msg.say(`Default prompt: ${default_prompt} \n MessageId: ${parentMessageId}`)
-    }
 
-  } else if (content === "菜单") {
+  if (content === "菜单") {
     await delay(200);
-    await msg.say('现在什么都没有了哦');
-  } else if (false) {
+    await msg.say(allKeywords);
+  } else if (content === "打赏") {
+    //这里换成自己的赞赏二维码
+    const fileBox = FileBox.fromFile(path.join(__dirname, "../imgs/pay.png"));
+    await msg.say("我是秦始皇，打钱!!!!!");
+    await delay(200);
+    await msg.say(fileBox);
+  } else if (content === "技术交流群" || parseInt(content) === 1) {
+    const webRoom = await bot.Room.find({
+      topic: config.WEBROOM
+    });
+    if (webRoom) {
+      try {
+        await delay(200);
+        await webRoom.add(contact);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+  } else if (content === "毒鸡汤" || parseInt(content) === 2) {
+    let soup = await superagent.getSoup();
+    await delay(200);
+    await msg.say(soup);
+  } else if (content === "神回复" || parseInt(content) === 3) {
+    const { title, content } = await superagent.getGodReply();
+    await delay(200);
+    await msg.say(`标题：${title}<br><br>神回复：${content}`);
+  } else if (content === "英语一句话" || parseInt(content) === 4) {
+    const { en, zh } = await superagent.getEnglishOne();
+    await delay(200);
+    await msg.say(`en：${en}<br><br>zh：${zh}`);
   } else {
     const noUtils = await onUtilsMessage(msg, bot);
     if (noUtils) {
@@ -90,34 +98,23 @@ async function onPeopleMessage(msg, bot) {
     }
   }
 }
-
 /**
  * 处理群消息
  */
 async function onWebRoomMessage(msg, bot) {
-  if (msg.age() > 300) {
-    console.log('Message discarded because its TOO OLD(than 5 mins)')
-    return
-  }
   const isText = msg.type() === bot.Message.Type.Text;
   if (isText) {
     const content = msg.text().trim(); // 消息内容
-    const contact = msg.talker().name();
     if (content === "毒鸡汤") {
-      const title = ""
-      const str = "别喝了，伤身体"
-      await msg.say(str);
-    } else if (content.indexOf("chat酱") === 0 
-	    || content.indexOf("@Chat酱") === 0) {
-      const res = await chatgpt(`\$${contact}\$ ${content}`);
-      if (! parentMessageId === 'none'){
-	  parentMessageId = res[1]
-      }
-      //await delay(200);
-      //await msg.say(`en：${res.en}<br><br>zh：${res.zh}`);
-      await msg.say(`@${contact} ${res[0]}`)
+      let poison = await superagent.getSoup();
+      await delay(200);
+      await msg.say(poison);
+    } else if (content === "英语一句话") {
+      const res = await superagent.getEnglishOne();
+      await delay(200);
+      await msg.say(`en：${res.en}<br><br>zh：${res.zh}`);
     } else {
-      return//await onUtilsMessage(res, bot);
+      await onUtilsMessage(msg, bot);
     }
   }
 }
@@ -180,7 +177,58 @@ async function onUtilsMessage(msg, bot) {
       } catch (error) {
         msg.say("接口错误");
       }
-    } 
+    } else if (content.includes("肺炎")) {
+      const config = [
+        "北京",
+        "湖北",
+        "广东",
+        "浙江",
+        "河南",
+        "湖南",
+        "重庆",
+        "安徽",
+        "四川",
+        "山东",
+        "吉林",
+        "福建",
+        "江西",
+        "江苏",
+        "上海",
+        "广西",
+        "海南",
+        "陕西",
+        "河北",
+        "黑龙江",
+        "辽宁",
+        "云南",
+        "天津",
+        "山西",
+        "甘肃",
+        "内蒙古",
+        "台湾",
+        "澳门",
+        "香港",
+        "贵州",
+        "西藏",
+        "青海",
+        "新疆",
+        "宁夏"
+      ];
+      let newContent = content.replace("肺炎", "").trim();
+      if (config.includes(newContent)) {
+        const data = await superagent.getProvinceFeiyan(newContent);
+        let citystr = "名称  确诊  治愈  死亡<br>";
+        data.city.forEach(item => {
+          citystr =
+            citystr +
+            `${item.name}  ${item.conNum}  ${item.cureNum}  ${item.deathNum}<br>`;
+        });
+        const str = `${newContent}新冠肺炎实时数据：<br>确诊：${data.value}<br>较昨日：${data.adddaily.conadd}<br>死亡：${data.deathNum}<br>较昨日：${data.adddaily.deathadd}<br>治愈：${data.cureNum}<br>较昨日：${data.adddaily.cureadd}<br>------------------<br>各地市实时数据：<br>${citystr}------------------<br>数据采集于新浪，如有问题，请及时联系`;
+        msg.say(str);
+      }
+    } else {
+      return true;
+    }
   } else {
     return true;
   }

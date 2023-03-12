@@ -7,6 +7,6 @@
  */
 module.exports = {
   IGNORE: ["www.iiter.cn"], //忽略某个用户的消息，填写昵称即可
-  WEBROOM: "Web前端交流群", //要管理的群名称
-  MYSELF: "Peanut" //大号的昵称
+  WEBROOM: ["DSE单身素材群", "猫猫群", "倒车请注意", "变态发情公牛鹤立淫魔入山海经"], //要管理的群名称
+  MYSELF: "Chat酱" //大号的昵称
 };

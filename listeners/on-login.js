@@ -16,13 +16,14 @@ const superagent = require("../superagent");
 async function onLogin(user,bot) {
   console.log(`贴心小助理${user}登录了`);
   //创建定时发送群消息任务
-  await onRoom(bot);
+  //await onRoom(bot);
 }
 /**
  * 9点定时给指定群发送消息
  */
 async function onRoom(bot) {
   //匹配规则可参考 schedule/index.js
+  return;
   const time = "0 0 9 * * *";
   schedule.setSchedule(time, async () => {
     const room = await bot.Room.find({
