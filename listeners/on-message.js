@@ -7,11 +7,8 @@
  */
 const path = require("path");
 const { FileBox } = require("file-box");
-const superagent = require("../superagent");
 const config = require("../config");
 const { colorRGBtoHex, colorHex } = require("../utils");
-//import { ChatGPTUnofficialProxyAPI } from 'chatgpt'
-//const ChatGPTUnofficialProxyAPI = import('chatgpt.chatGPTUnofficialProxyAPI');
 var parentMessageId = 'none'
 var default_prompt = ''
 
@@ -160,27 +157,7 @@ async function onUtilsMessage(msg, bot) {
         console.error(error);
         await msg.say("转换失败，请检查");
       }
-    } else if (content === "全国肺炎") {
-      try {
-        const res = await superagent.getChinaFeiyan();
-        const chinaTotal = res.data.chinaTotal.total;
-        const chinaToday = res.data.chinaTotal.today;
-        const str = `全国新冠肺炎实时数据：<br>确诊：${
-          chinaTotal.confirm
-        }<br>较昨日：${
-          chinaToday.confirm > 0 ? "+" + chinaToday.confirm : chinaToday.confirm
-        }<br>疑似：${chinaTotal.suspect}<br>较昨日：${
-          chinaToday.suspect > 0 ? "+" + chinaToday.suspect : chinaToday.suspect
-        }<br>死亡：${chinaTotal.dead}<br>较昨日：${
-          chinaToday.dead > 0 ? "+" + chinaToday.dead : chinaToday.dead
-        }<br>治愈：${chinaTotal.heal}<br>较昨日：${
-          chinaToday.heal > 0 ? "+" + chinaToday.heal : chinaToday.heal
-        }<br>------------------<br>数据采集于网易，如有问题，请及时联系`;
-        msg.say(str);
-      } catch (error) {
-        msg.say("接口错误");
-      }
-    } 
+    }
   } else {
     return true;
   }

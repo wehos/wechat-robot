@@ -8,13 +8,12 @@
 const schedule = require("../schedule");
 const config = require("../config");
 const untils = require("../utils");
-const superagent = require("../superagent");
 /**
  * @description 您的机器人上线啦
  * @param {} user
  */
 async function onLogin(user,bot) {
-  console.log(`贴心小助理${user}登录了`);
+  console.log(`chat酱登录了`);
   //创建定时发送群消息任务
   //await onRoom(bot);
 }
@@ -30,11 +29,7 @@ async function onRoom(bot) {
       topic: config.WEBROOM
     });
     let today = await untils.formatDate(new Date()); //获取今天的日期
-    let one = await superagent.getOne(); //获取每日一句
-    const englishData = await superagent.getEnglishOne(); //英语一句话
-    let english = `en：${englishData.en}\nzh：${englishData.zh}`;
-    let poison = await superagent.getPoison(); //毒鸡汤
-    const str = `${today}\n元气满满的一天开始啦,要加油噢^_^\n\n每日一句：\n${one}\n\n英语一句话：\n${english}\n\n毒鸡汤：\n${poison}`;
+    const str = `${today}\n元气满满的一天开始啦,要加油噢^_^`;
     await room.say(str);
   });
 }
