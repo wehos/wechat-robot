@@ -3,7 +3,6 @@
   "compilerOptions": {
     "outDir": "dist"
   },
-  "_module" : "CommonJS",
   "exclude": [
     "node_modules/",
     "dist/",

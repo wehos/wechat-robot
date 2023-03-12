@@ -9,8 +9,9 @@ const {
  * 自动同意好友请求
  */
 async function onFriendship(friendship) {
-  if (friendship.type() === Friendship.Type.Receive) {
-    await friendship.accept();
-  }
+  //if (friendship.type() === Friendship.Type.Receive) {
+  //  await friendship.accept();
+  //}
+  return
 }
 module.exports = onFriendship
