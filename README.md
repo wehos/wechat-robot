@@ -9,30 +9,29 @@
 - node.js >= 16  
 - [wechaty](https://github.com/wechaty/wechaty) Wechat Robot SDK
 - [wechaty-puppet-wechat](https://github.com/wechaty/puppet-wechat) Web protocol for Wechat that supports UOS
-- ~~[superagent](https://github.com/visionmedia/superagent) 数据请求~~ Should be removed in the next version
-- [cheerio](https://github.com/cheeriojs/cheerio) nodejs 版 jQuery，用于抓取页面内容
-- [node-schedule](https://github.com/node-schedule/node-schedule) 一个在 nodejs 中设置定时任务的库
-- [qrcode-terminal](https://github.com/gtanner/qrcode-terminal) 在控制台打印二维码
+- [cheerio](https://github.com/cheeriojs/cheerio) jQuery (nodejs ver.) for fetching web resources
+- [node-schedule](https://github.com/node-schedule/node-schedule) Task scheduler in nodejs
+- [qrcode-terminal](https://github.com/gtanner/qrcode-terminal) Printing qrcode in console.
 - [chatgpt](https://github.com/transitive-bullshit/chatgpt-api) Chatgpt API for nodejs
 
 ### Directory Structure
 
-- `config`存放公共配置以及`superagent`请求相关配置
-- `imgs`存放相关图片
-- `listeners`存放机器人初始化后一系列 callback
-  - `on-friendship.js` 处理好友请求
-  - `on-login.js` 处理登录
-  - `on-message.js` 处理用户消息、群消息
-  - `on-scan.js` 处理登录二维码
-- `schedule` 对`node-schedule`进行了封装
-- `utils` 公用方法的封装
-- `app.js` 入口文件
+- `config` for personalized settings
+- `imgs` for storing images
+- `listeners` for callback functions of the chatbot
+  - `on-friendship.js` processing friend requests
+  - `on-login.js` processing login events
+  - `on-message.js` responding to messages
+  - `on-scan.js` processing qrcodes for login
+- `schedule` wrapper of `node-schedule`
+- `utils` public utils
+- `app.js` main entrance
 
-### 修改`config`配置
+### `config` Setup
 
 Edit `config/index.js` for personalized settings.
 
-### 运行测试
+### Run
 
 ```bash
 cnpm start //npm start
@@ -40,7 +39,6 @@ cnpm start //npm start
 
 
 
-底层 api 基于 [wechaty](https://github.com/wechaty/wechaty)
-
-更多微信消息、群消息、好友、对话等相关 api 可查阅官方文档 [wechaty 官方文档](https://github.com/wechaty/wechaty/blob/master/docs/index.md)
+Wechat API based on [wechaty](https://github.com/wechaty/wechaty)
+More usage of wechaty can be found on [wechaty 官方文档](https://github.com/wechaty/wechaty/blob/master/docs/index.md)
 
