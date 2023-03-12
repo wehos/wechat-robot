@@ -25,7 +25,6 @@
   - `on-message.js` 处理用户消息、群消息
   - `on-scan.js` 处理登录二维码
 - `schedule` 对`node-schedule`进行了封装
-- `superagent` 存放所有的数据请求、接口封装都在此
 - `utils` 公用方法的封装
 - `app.js` 入口文件
 
