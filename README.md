@@ -39,6 +39,6 @@ npm start
 
 
 
-Wechat API based on [wechaty](https://github.com/wechaty/wechaty)
+Wechat API based on [wechaty](https://github.com/wechaty/wechaty).   
 More usage of wechaty can be found on [wechaty 官方文档](https://github.com/wechaty/wechaty/blob/master/docs/index.md)
 
