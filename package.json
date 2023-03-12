@@ -1,21 +1,17 @@
 {
-  "name": "wechat-robot",
+  "name": "wechat-robot-chatgpt",
   "version": "1.0.0",
-  "description": "一款nodejs版微信机器人，群聊小助手",
-  "author": "Peanut <htmlcs@163.com>",
+  "description": "wechat robot for chatgpt",
+  "author": "wenhongz@msu.edu",
   "license": "MIT",
   "keywords": [
-    "微信机器人",
-    "微信小助手",
-    "微信群聊机器人",
-    "微信小秘书",
-    "微信每日说",
     "wechaty",
-    "微信助手"
+    "wechat-chatgpt",
+    "wechat-robot"
   ],
   "main": "app.js",
   "engines": {
-    "node": ">= 10"
+    "node": ">= 16"
   },
   "scripts": {
     "start": "node app.js"
@@ -26,7 +22,6 @@
     "node-schedule": "^1.3.2",
     "qrcode-terminal": "^0.12.0",
     "request": "^2.88.0",
-    "superagent": "^4.1.0",
     "wechaty": "^1.20.2",
     "wechaty-puppet-wechat": "^1.18.4"
   },
