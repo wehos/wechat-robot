@@ -34,7 +34,7 @@ Edit `config/index.js` for personalized settings.
 ### Run
 
 ```bash
-cnpm start //npm start
+npm start
 ```
 
 
