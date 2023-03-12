@@ -1,6 +1,6 @@
-### 使用 nodejs + wecharty 打造你的个人微信机器人
+### Wechat Chatgpt Robot based on Wechaty (node js ver.)
 
-[![Powered by Wechaty](https://img.shields.io/badge/Powered%20By-Wechaty-green.svg)](https://github.com/chatie/wechaty) (https://github.com/juzibot/Welcome/wiki/Everything-about-Wechaty)
+[![Powered by Wechaty](https://img.shields.io/badge/Powered%20By-Wechaty-green.svg)](https://github.com/chatie/wechaty) 
 
 [2022-07-26：Use UOS web protocol to achieve wechat login](https://github.com/wechaty/puppet-wechat/pull/206)
 
