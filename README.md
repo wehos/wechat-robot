@@ -7,8 +7,9 @@
 ### Dependency
 
 - node.js >= 16  
-- [wechaty](https://github.com/wechaty/wechaty) 个人微信账号的微信机器人 SDK
-- [superagent](https://github.com/visionmedia/superagent) 数据请求
+- [wechaty](https://github.com/wechaty/wechaty) Wechat Robot SDK
+- [wechaty-puppet-wechat](https://github.com/wechaty/puppet-wechat) Web protocol for Wechat that supports UOS
+- ~~[superagent](https://github.com/visionmedia/superagent) 数据请求~~ Should be removed in the next version
 - [cheerio](https://github.com/cheeriojs/cheerio) nodejs 版 jQuery，用于抓取页面内容
 - [node-schedule](https://github.com/node-schedule/node-schedule) 一个在 nodejs 中设置定时任务的库
 - [qrcode-terminal](https://github.com/gtanner/qrcode-terminal) 在控制台打印二维码
@@ -30,7 +31,7 @@
 
 ### 修改`config`配置
 
-打开`config/index.js` 文件，将里面的配置改为自己的。
+Edit `config/index.js` for personalized settings.
 
 ### 运行测试
 
