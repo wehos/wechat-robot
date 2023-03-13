@@ -16,11 +16,8 @@ const onFriendship = require("./listeners/on-friendship.js");
 //(async function test() {(await import('./test.mjs')).test();})()
 
 const bot = WechatyBuilder.build({
-  name: "wechat-bot",
-  puppet: "wechaty-puppet-wechat",
-  puppetOptions: {
-    uos: true,
-  },
+  name: "whatsapp-bot",
+  puppet: "wechaty-puppet-whatsapp",
 });
 bot.on("login", async user => {
   onLogin(user, bot);
@@ -36,5 +33,5 @@ bot.on("friendship", async friendship => {
 });
 bot
   .start()
-  .then(() => console.log("开始登陆微信"))
+  .then(() => console.log("开始登陆whatsapp"))
   .catch(e => console.error(e));

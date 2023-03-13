@@ -3,6 +3,7 @@
  * by: Peanut
  */
 async function onScan (qrcode, status) {
+  console.log('attempting to login')
   require('qrcode-terminal').generate(qrcode, {small: true})
 
   const qrcodeImageUrl = [
