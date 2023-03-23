@@ -1,38 +1,16 @@
 {
-  "name": "whatsapp-robot-chatgpt",
-  "version": "1.0.0",
-  "description": "whatsapp robot for chatgpt",
-  "author": "wenhongz@msu.edu",
-  "license": "MIT",
-  "keywords": [
-    "wechaty",
-    "whatsapp-chatgpt",
-    "whatsapp-robot"
-  ],
-  "main": "app.js",
-  "engines": {
-    "node": ">= 16"
-  },
   "scripts": {
-    "start": "node app.js"
+    "start": "node main.js"
   },
   "dependencies": {
-    "@juzi/whatsapp-web.js": "^1.19.5",
-    "wechaty": "^1.20.2",
-    "wechaty-puppet-whatsapp": "^1.19.16"
-  },
-  "devDependencies": {
-    "@chatie/eslint-config": "^0.6.17",
-    "@chatie/git-scripts": "^0.2.5",
-    "@chatie/tsconfig": "^0.6.1",
-    "check-node-version": "^3.2.0"
-  },
-  "volta": {
-    "node": "16.18.0"
-  },
-  "git": {
-    "scripts": {
-      "pre-push": "npx git-scripts-pre-push"
-    }
+    "@keyv/mongo": "^2.1.8",
+    "chatgpt": "^5.0.10",
+    "keyv": "^4.5.2",
+    "mongoose": "^7.0.2",
+    "node-schedule": "^2.1.1",
+    "openai": "^3.2.1",
+    "qrcode-terminal": "^0.12.0",
+    "whatsapp-web.js": "^1.19.4",
+    "wwebjs-mongo": "^1.1.0"
   }
 }

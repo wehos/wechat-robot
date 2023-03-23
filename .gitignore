@@ -1,3 +1,3 @@
-/node_modules/*
-WeChat-Robot.memory-card.json
-wechat-puppet-wechat.memory-card.json
+userdict.json
+node_modules
+.wwebjs_auth

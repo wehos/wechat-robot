@@ -1,10 +1,11 @@
 const { Client, Location, List, Buttons, LocalAuth} = require('whatsapp-web.js');
 const qrcode = require('qrcode-terminal');
 const onMessage = require("./listeners/on-message.js");
-
+const onLogin = require("./listeners/on-login.js");
 const client = new Client({
     authStrategy: new LocalAuth(),
-    puppeteer: { headless: false }
+    puppeteer: { //headless: false ,
+    args: ['--no-sandbox']}
 });
 
 client.initialize();
@@ -30,6 +31,7 @@ client.on('auth_failure', msg => {
 
 client.on('ready', () => {
     console.log('READY');
+    onLogin(client);
 });
 
 client.on('message', async msg => {onMessage(msg);});
